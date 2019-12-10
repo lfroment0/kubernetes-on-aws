@@ -257,8 +257,8 @@ dynamodb_service_link_enabled: "false"
 cluster_dns: "coredns"
 coredns_log_svc_names: "true"
 
-kuberuntu_image_v1_14: {{ amiID "zalando-ubuntu-kubernetes-production-v1.14.8-master-77" "861068367966" }}
 kuberuntu_image_v1_15: {{ amiID "zalando-ubuntu-kubernetes-production-v1.15.6-master-81" "861068367966" }}
+kuberuntu_image_v1_16: {{ amiID "zalando-ubuntu-kubernetes-production-v1.16.4-master-84" "861068367966" }}
 
 # Feature toggle to allow gradual decommissioning of ingress-template-controller
 enable_ingress_template_controller: "false"
@@ -278,14 +278,6 @@ audittrail_url: "https://audittrail.cloud.zalando.com"
 audittrail_url: ""
 {{end}}
 audittrail_root_account_role: ""
-
-# Feature toggle for CustomResourceWebhookConversion (alpha in v1.13)
-# https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion
-custom_resource_webhook_conversion: "false"
-
-# Feature toggle for CustomResourcePublishOpenAPI (alpha in v1.14)
-# https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#publish-validation-schema-in-openapi-v2
-custom_resource_publish_openapi: "false"
 
 # CIDR configuration for nodes and pods
 # Changing this will change the number of nodes and pods we can schedule in the
@@ -323,3 +315,6 @@ custom_dns_zone_nameservers: "" # space seperated list of nameserver IP addresse
 
 # prefix prepended to ownership TXT records for external-dns
 external_dns_ownership_prefix: ""
+
+# Enable FeatureGate EndpointSlice
+enable_endpointslice: "false"
