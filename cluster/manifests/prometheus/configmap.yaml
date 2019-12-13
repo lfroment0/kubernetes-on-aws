@@ -172,3 +172,8 @@ data:
        - source_labels: [ __name__ ]
          regex: 'reflector.*'
          action: drop
+{{- if ne .ConfigItems.prometheus_remote_write "disabled" }}
+    remote_write:
+    - url: {{ .ConfigItems.prometheus_remote_write }}
+      bearer_token_file: /meta/credentials/remote-write
+{{- end }}

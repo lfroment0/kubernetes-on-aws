@@ -63,6 +63,10 @@ spec:
           mountPath: /etc/prometheus
         - name: prometheus-storage-volume
           mountPath: /prometheus
+{{- if ne .ConfigItems.prometheus_remote_write "disabled" }}
+        - name: prometheus-credentials
+          mountPath: /meta/credentials
+{{- end }}
         securityContext:
           allowPrivilegeEscalation: false
       volumes:
@@ -70,6 +74,11 @@ spec:
         configMap:
           defaultMode: 420
           name: prometheus-conf
+{{- if ne .ConfigItems.prometheus_remote_write "disabled" }}
+      - name: prometheus-credentials
+        secret:
+          secretName: prometheus-credentials
+{{- end }}
       securityContext:
         runAsUser: 65534
         fsGroup: 65534
